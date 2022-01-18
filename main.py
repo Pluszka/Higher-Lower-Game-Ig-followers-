@@ -8,7 +8,13 @@ clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 POSITION_A='Compare A: '
 POSITION_B='Agnist B: '
 
-# def previous_winner():
+def previous_winner(position,previous_result):
+  if position==POSITION_A and previous_result!=None:
+    for vips in data:
+      if previous_result==vips['follower_count']:
+        return vips
+  else:
+    return choose_person()
 
 def next_a(letter, ansA, ansB):
   if letter=='A':
@@ -33,13 +39,8 @@ def choose_person():
   return choice(data)
 
 
-def descriptions(position, previous, previosu_result):
-  if position==POSITION_A and previosu_result!=None:
-    for vips in data:
-      if previosu_result==vips['follower_count']:
-        person_infos=vips
-  else:
-    person_infos=choose_person()
+def descriptions(position, previous, previous_result):
+  person_infos=previous_winner(position,previous_result)
   score=person_infos['follower_count']
   if previous!=None:
     while score==previous:
