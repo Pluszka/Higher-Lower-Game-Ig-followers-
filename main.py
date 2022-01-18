@@ -59,6 +59,7 @@ def descriptions(position, previous, previous_result):
 
 def battle(previosu_right_amount):
   a_score=descriptions(POSITION_A, None, previosu_right_amount)
+  print(VS)
   b_score=descriptions(POSITION_B, a_score, previosu_right_amount)
   player_answer=onlyAB()
   return (compare(a_score,b_score, player_answer)),player_answer, a_score, b_score
@@ -68,11 +69,11 @@ def game():
   gameprogress='True'
   player_score=0
   right_followers=None
+  print(LOGO)
   print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
   while gameprogress:
     print(f'\nCurrent score:{player_score}\n')
     result=battle(right_followers)
-    print(result)
     right_followers=next_a(result[1], result[2], result[3])
     result=result[0]
     if result:
