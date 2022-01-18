@@ -10,11 +10,6 @@ POSITION_B='Agnist B: '
 gameprogress='True'
 player_score=0
 
-def not_same_person(person1, person2):
-  while person1==person2:
-    person2=descriptions(POSITION_B)
-  return person2
-
 
 def onlyAB():
   answer=None
@@ -32,20 +27,22 @@ def choose_person():
   return choice(data)
 
 
-def descriptions(position, test):
-  person_infos=test
-  # person_infos=choose_person()
+def descriptions(position, previous):
+  person_infos=choose_person()
+  score=person_infos['follower_count']
+  if previous!=None:
+    while score==previous:
+      person_infos=choose_person()
+      score=person_infos['follower_count']
   name=person_infos['name']
   country=person_infos['country']
   desc=person_infos['description']
-  score=person_infos['follower_count']
   print(f'{position}{name}, {desc} from {country}')
   return score
 
 def battle():
-  a_score=descriptions(POSITION_A)
-  b_score=descriptions(POSITION_B)
-  b_score=not_same_person(a_score, b_score)
+  a_score=descriptions(POSITION_A, None)
+  b_score=descriptions(POSITION_B, a_score)
   print('Hint: ', a_score,b_score)
   player_answer=onlyAB()
   return (compare(a_score,b_score, player_answer))
