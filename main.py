@@ -5,6 +5,11 @@ import os
 
 clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
+import art
+
+LOGO=art.logo
+VS=art.vs
+
 POSITION_A='Compare A: '
 POSITION_B='Agnist B: '
 
@@ -55,7 +60,6 @@ def descriptions(position, previous, previous_result):
 def battle(previosu_right_amount):
   a_score=descriptions(POSITION_A, None, previosu_right_amount)
   b_score=descriptions(POSITION_B, a_score, previosu_right_amount)
-  print('Hint: ', a_score,b_score)
   player_answer=onlyAB()
   return (compare(a_score,b_score, player_answer)),player_answer, a_score, b_score
 
@@ -74,6 +78,7 @@ def game():
     if result:
       player_score+=1
     else:
+      print('You failed.')
       gameprogress= False
 
   print(f'You finished the game with total score: {player_score}')
@@ -82,3 +87,5 @@ def game():
     game()
 
 game()
+clearConsole()
+print('See you next time.')
