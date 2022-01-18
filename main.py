@@ -7,8 +7,6 @@ clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
 POSITION_A='Compare A: '
 POSITION_B='Agnist B: '
-gameprogress='True'
-player_score=0
 
 
 def onlyAB():
@@ -47,12 +45,22 @@ def battle():
   player_answer=onlyAB()
   return (compare(a_score,b_score, player_answer))
 
+def game():
+  clearConsole()
+  gameprogress='True'
+  player_score=0
+  print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
+  while gameprogress:
+    print(f'\nCurrent score:{player_score}\n')
+    result=battle()
+    if result:
+      player_score+=1
+    else:
+      gameprogress= False
 
-print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
-while gameprogress:
-  print(f'\nCurrent score:{player_score}\n')
-  result=battle()
-  if result:
-    player_score+=1
-  else:
-    gameprogress= False
+  print(f'You finished the game with total score: {player_score}')
+  again=input('Will you play again?(Y/ any button fo no)').upper()
+  if again=='Y':
+    game()
+
+game()
