@@ -8,6 +8,14 @@ clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 POSITION_A='Compare A: '
 POSITION_B='Agnist B: '
 
+# def previous_winner():
+
+def next_a(letter, ansA, ansB):
+  if letter=='A':
+    return ansA
+  else:
+    return ansB
+
 
 def onlyAB():
   answer=None
@@ -25,8 +33,13 @@ def choose_person():
   return choice(data)
 
 
-def descriptions(position, previous):
-  person_infos=choose_person()
+def descriptions(position, previous, previosu_result):
+  if position==POSITION_A and previosu_result!=None:
+    for vips in data:
+      if previosu_result==vips['follower_count']:
+        person_infos=vips
+  else:
+    person_infos=choose_person()
   score=person_infos['follower_count']
   if previous!=None:
     while score==previous:
@@ -38,21 +51,25 @@ def descriptions(position, previous):
   print(f'{position}{name}, {desc} from {country}')
   return score
 
-def battle():
-  a_score=descriptions(POSITION_A, None)
-  b_score=descriptions(POSITION_B, a_score)
+def battle(previosu_right_amount):
+  a_score=descriptions(POSITION_A, None, previosu_right_amount)
+  b_score=descriptions(POSITION_B, a_score, previosu_right_amount)
   print('Hint: ', a_score,b_score)
   player_answer=onlyAB()
-  return (compare(a_score,b_score, player_answer))
+  return (compare(a_score,b_score, player_answer)),player_answer, a_score, b_score
 
 def game():
   clearConsole()
   gameprogress='True'
   player_score=0
+  right_followers=None
   print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
   while gameprogress:
     print(f'\nCurrent score:{player_score}\n')
-    result=battle()
+    result=battle(right_followers)
+    print(result)
+    right_followers=next_a(result[1], result[2], result[3])
+    result=result[0]
     if result:
       player_score+=1
     else:
