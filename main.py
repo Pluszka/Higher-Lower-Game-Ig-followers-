@@ -1,4 +1,4 @@
-#popraw losowanie tych samych osób
+#popraw losowanie tych samych osób, poprawione ale printuje dwa razy B jak b jest równe A
 from random import choice
 from game_data import data
 import os
@@ -9,6 +9,12 @@ POSITION_A='Compare A: '
 POSITION_B='Agnist B: '
 gameprogress='True'
 player_score=0
+
+def not_same_person(person1, person2):
+  while person1==person2:
+    person2=descriptions(POSITION_B)
+  return person2
+
 
 def onlyAB():
   answer=None
@@ -26,8 +32,9 @@ def choose_person():
   return choice(data)
 
 
-def descriptions(position):
-  person_infos=choose_person()
+def descriptions(position, test):
+  person_infos=test
+  # person_infos=choose_person()
   name=person_infos['name']
   country=person_infos['country']
   desc=person_infos['description']
@@ -38,6 +45,7 @@ def descriptions(position):
 def battle():
   a_score=descriptions(POSITION_A)
   b_score=descriptions(POSITION_B)
+  b_score=not_same_person(a_score, b_score)
   print('Hint: ', a_score,b_score)
   player_answer=onlyAB()
   return (compare(a_score,b_score, player_answer))
@@ -45,6 +53,7 @@ def battle():
 
 print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
 while gameprogress:
+  print(f'\nCurrent score:{player_score}\n')
   result=battle()
   if result:
     player_score+=1
