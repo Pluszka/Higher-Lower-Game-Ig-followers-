@@ -69,9 +69,9 @@ def game():
   gameprogress='True'
   player_score=0
   right_followers=None
-  print(LOGO)
-  print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
   while gameprogress:
+    print(LOGO)
+    print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
     print(f'\nCurrent score:{player_score}\n')
     result=battle(right_followers)
     right_followers=next_a(result[1], result[2], result[3])
@@ -81,12 +81,13 @@ def game():
     else:
       print('You failed.')
       gameprogress= False
+    clearConsole()
 
-  print(f'You finished the game with total score: {player_score}')
+  print(f'{LOGO}\nYou finished the game with total score: {player_score}')
   again=input('Will you play again?(Y/ any button fo no)').upper()
   if again=='Y':
     game()
 
 game()
 clearConsole()
-print('See you next time.')
+print(f'{LOGO}\nSee you next time.')
