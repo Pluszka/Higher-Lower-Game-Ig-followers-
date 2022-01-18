@@ -40,7 +40,7 @@ def battle():
   b_score=descriptions(POSITION_B)
   print('Hint: ', a_score,b_score)
   player_answer=onlyAB()
-  print(compare(a_score,b_score, player_answer))
+  return (compare(a_score,b_score, player_answer))
 
 
 print('Welcome to Higer or Lower Game. You must guess which one of those accounts have more followers on Instagram.\nGood luck!')
@@ -49,4 +49,4 @@ while gameprogress:
   if result:
     player_score+=1
   else:
-    gameprogress=False
+    gameprogress= False
