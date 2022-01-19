@@ -1,4 +1,4 @@
-#popraw losowanie tych samych osób, poprawione ale printuje dwa razy B jak b jest równe A
+
 from random import choice
 from game_data import data
 import os
